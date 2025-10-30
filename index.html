@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kanigiri Devika — Portfolio</title>
+  <style>
+    :root{
+      --bg:#07070b;
+      --muted:#9aa4b2;
+      --accent1:#6b6ef2;
+      --accent2:#5ce1e6;
+      --radius:14px;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui;
+      background:radial-gradient(1000px 600px at 10% 10%,rgba(92,225,230,0.08),transparent),
+                 radial-gradient(900px 500px at 90% 90%,rgba(107,110,242,0.06),transparent),
+                 var(--bg);
+      color:#e6eef6;
+      line-height:1.5;
+      padding:40px 24px;
+      display:flex;justify-content:center;
+    }
+    .container{width:100%;max-width:var(--max-width);}
+
+    /* Header */
+    header{position:sticky;top:18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;z-index:10}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .dot{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav{display:flex;gap:10px}
+    nav a{text-decoration:none;color:var(--muted);font-size:14px;padding:8px;border-radius:8px;transition:.25s}
+    nav a:hover,nav a.active{color:#fff;background:rgba(255,255,255,0.05)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center;margin-bottom:50px}
+    .intro{animation:slideInLeft 1s ease forwards;background:rgba(255,255,255,0.02);border-radius:var(--radius);padding:30px}
+    @keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+    .intro h1{margin:0 0 8px;font-size:32px}
+    .intro p{color:var(--muted)}
+    .cta-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#031024;padding:10px 14px;border-radius:10px;font-weight:600;text-decoration:none}
+    .btn.secondary{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.1)}
+
+    /* Profile card like screenshot */
+    .profile-card{position:relative;background:rgba(255,255,255,0.04);border-radius:20px;padding:30px;text-align:center;box-shadow:0 0 25px rgba(107,110,242,0.15)}
+    .profile-pic{position:relative;width:220px;height:220px;margin:0 auto;border-radius:50%;overflow:hidden;padding:6px;background:linear-gradient(135deg,var(--accent1),var(--accent2))}
+    .profile-pic img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:6px solid #07070b}
+    .info-badge{position:absolute;background:rgba(255,255,255,0.07);color:#fff;border-radius:20px;padding:6px 10px;font-size:13px;backdrop-filter:blur(4px)}
+    .info-badge.left{left:12px;top:58%}
+    .info-badge.right{right:12px;top:58%}
+    .profile-card h3{margin-top:14px;font-size:20px}
+    .profile-card .muted{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .socials a{color:var(--muted);text-decoration:none;margin:0 6px;font-size:14px}
+    .socials a:hover{color:var(--accent2)}
+
+    /* Sections */
+    section{margin-bottom:30px;padding:18px;border-radius:14px;background:rgba(255,255,255,0.01)}
+    .section-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .section-header h2{margin:0;font-size:20px;color:#fff}
+    .section-header .line{height:2px;width:48px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:4px}
+    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);padding:18px;border-radius:12px;transition:0.35s;box-shadow:0 0 22px rgba(107,110,242,0.06)}
+    .card:hover{transform:translateY(-4px);box-shadow:0 0 36px rgba(92,225,230,0.12)}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+    .project-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.04);transition:transform .35s,box-shadow .35s}
+    .project-card:hover{transform:translateY(-8px);box-shadow:0 12px 40px rgba(107,110,242,0.18)}
+    .project-card h3{margin:0 0 6px}
+    .project-meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);margin-bottom:8px}
+    .tech-list{font-size:13px;color:var(--accent2)}
+
+    /* Skills grid (attractive) */
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:12px}
+    .skill{background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;text-align:center;color:var(--muted);transition:all .25s;border:1px solid rgba(255,255,255,0.03)}
+    .skill:hover{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#031024;transform:scale(1.05);box-shadow:0 6px 20px rgba(92,225,230,0.12)}
+
+    /* Achievements */
+    #achievements .card ul{list-style:none;padding-left:0;margin:0}
+    #achievements .card li{margin-bottom:10px;padding-left:22px;position:relative;font-size:15px}
+    #achievements .card li::before{content:"🏅";position:absolute;left:0;top:0;font-size:16px}
+
+    /* Training & Workshops */
+    #training .card ul{list-style:none;padding-left:0;margin:0}
+    #training .card li{margin-bottom:10px;padding-left:22px;position:relative}
+    #training .card li::before{content:"📚";position:absolute;left:0;top:0}
+
+    /* Certifications */
+    .cert-list{display:flex;flex-direction:column;gap:10px}
+    .cert-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+    .view-btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#031024;padding:6px 10px;border-radius:8px;text-decoration:none;font-weight:600}
+    .view-btn:hover{opacity:0.95;transform:scale(1.03)}
+
+    /* Contact (attractive) */
+    .contact-grid{display:grid;grid-template-columns:1fr 200px;gap:18px;align-items:center}
+    .contact-info p{margin:0 0 8px 0}
+    .contact-card{display:flex;flex-direction:column;gap:8px}
+    .contact-icons a{display:inline-block;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--accent2);text-decoration:none;font-weight:600}
+    .contact-icons a:hover{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#031024}
+
+    footer{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
+    @media(max-width:980px){.hero{grid-template-columns:1fr} .contact-grid{grid-template-columns:1fr}}
+    .reveal{opacity:0;transform:translateY(20px);transition:.6s}
+    .reveal.show{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="dot">KD</div>
+        <div>
+          <div style="font-weight:700">Kanigiri Devika</div>
+          <div style="font-size:12px;color:var(--muted)">Software Developer • AI/ML Enthusiast</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#training">Training</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero reveal" id="home">
+        <div class="intro">
+          <h1>Hi — I’m <span style="color:var(--accent2)">Kanigiri Devika</span></h1>
+          <p>Passionate Software Developer skilled in <strong>Java, Python, React</strong> and <strong>AI/ML</strong>. I build full-stack apps and intelligent systems that solve real problems.</p>
+          <p style="color:var(--accent2);font-weight:600;margin-top:8px;">🚀 Actively seeking Internship & Full-Time opportunities.</p>
+          <div class="cta-row">
+            <a class="btn" href="#projects">View Projects ▸</a>
+            <a class="btn secondary" href="resume.pdf" download>Download Resume</a>
+          </div>
+        </div>
+
+        <aside class="profile-card">
+          <div class="profile-pic">
+            <img src="profile.jpg" alt="Kanigiri Devika">
+          </div>
+          <div class="info-badge left">AI/ML Enthusiast</div>
+          <div class="info-badge right">CSE Student</div>
+          <h3>Kanigiri Devika</h3>
+          <p class="muted">B.Tech CSE (AIML) • AI Enthusiast</p>
+          <div class="socials">
+            <a href="https://www.linkedin.com/in/devika-kanigiri-210343346" target="_blank">LinkedIn</a> ·
+            <a href="https://github.com/Devika9511" target="_blank">GitHub</a> ·
+            <a href="https://leetcode.com/u/Devikakanigiri/" target="_blank">LeetCode</a>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="reveal">
+        <div class="section-header"><h2>About</h2><div class="line"></div></div>
+        <div class="card">
+          <p>I'm a <strong>B.Tech CSE (AIML)</strong> student with hands-on experience building full-stack web applications, mobile apps, and AI/ML models. I enjoy turning ideas into production-ready systems and learning new tech stacks along the way.</p>
+          <p class="muted">I focus on software engineering, machine learning, and designing efficient, scalable systems.</p>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education" class="reveal">
+        <div class="section-header"><h2>Education</h2><div class="line"></div></div>
+        <div class="card">
+          <div class="edu-item"><strong>BVRIT Hyderabad College of Engineering for Women</strong><br><span>B.Tech — CSE (AIML) | 2022–2026 | CGPA: 8.35</span></div>
+
+          <div class="edu-item"><strong>Jawahar Navodaya Vidyalaya</strong><br><span>Intermediate | GPA: 7.3</span></div>
+
+          <div class="edu-item"><strong>St. Claret High School</strong><br><span>SSC | GPA: 10</span></div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="reveal">
+        <div class="section-header"><h2>Projects</h2><div class="line"></div></div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-meta"><div>EcoPlastix</div><div class="year muted">2025</div></div>
+            <h3>EcoPlastix — Plastic Waste Exchange</h3>
+            <p class="muted">An online platform where users upload plastic pickup data, companies bid to collect, and users are rewarded for verified collections.</p>
+            <p class="tech-list">Tech: MongoDB · Express · React · Node.js</p>
+          </div>
+
+          <div class="project-card">
+            <div class="project-meta"><div>Intelligent Doc Classifier</div><div class="year muted">2025</div></div>
+            <h3>Intelligent Document Classifier</h3>
+            <p class="muted">AI/NLP pipeline that preprocesses documents, vectors them, and classifies into categories using ML models and a Streamlit demo.</p>
+            <p class="tech-list">Tech: Python · Scikit-learn · NLTK/Spacy · Streamlit</p>
+          </div>
+
+          <div class="project-card">
+            <div class="project-meta"><div>FoodBridge</div><div class="year muted">2024</div></div>
+            <h3>FoodBridge — Donation App</h3>
+            <p class="muted">A mobile app connecting food donors and charities, reducing waste and enabling quick pickups through Firebase backend.</p>
+            <p class="tech-list">Tech: Kotlin · Android Studio · Firebase</p>
+          </div>
+
+          <div class="project-card">
+            <div class="project-meta"><div>Hotel Management System</div><div class="year muted">2024</div></div>
+            <h3>Hotel Management System </h3>
+            <p class="muted">Hotel Management System is a desktop application developed in Java with a Swing-based GUI. It is designed to make hotel operations like room management, booking, food ordering, and billing convenient and user-friendly.</p>
+            <p class="tech-list">Tech: Java . JavaSwing . Oops </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="reveal">
+        <div class="section-header"><h2>Technologies & Skills</h2><div class="line"></div></div>
+        <div class="card">
+          <div class="skills-grid">
+            <div class="skill">Java</div>
+            <div class="skill">Python</div>
+            <div class="skill">C</div>
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
+            <div class="skill">MongoDB</div>
+            <div class="skill">Kotlin</div>
+            <div class="skill">Firebase</div>
+            <div class="skill">Scikit-learn</div>
+            <div class="skill">Pandas</div>
+            <div class="skill">NLTK / Spacy</div>
+            <div class="skill">Data Structures</div>
+            <div class="skill">OOP</div>
+            <div class="skill">Git & GitHub</div>
+            <div class="skill">Linux</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACHIEVEMENTS -->
+      <section id="achievements" class="reveal">
+        <div class="section-header"><h2>Achievements</h2><div class="line"></div></div>
+        <div class="card">
+          <ul>
+            <li><strong>50 Days Consistency Badge</strong> — Earned twice on LeetCode</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- TRAINING & WORKSHOPS -->
+      <section id="training" class="reveal">
+        <div class="section-header"><h2>Training</h2><div class="line"></div></div>
+        <div class="card">
+          <ul>
+            <li><strong>Data Structures & Algorithms (DSA)</strong> — Structured training at <strong>Being Zero</strong></li>
+            <li><strong>Mobile Application Development</strong> — Hands-on training at <strong>BVRIT Hyderabad</strong> (Android & Kotlin)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CERTIFICATIONS -->
+      <section id="certifications" class="reveal">
+        <div class="section-header"><h2>Certifications</h2><div class="line"></div></div>
+        <div class="card cert-list">
+          <div class="cert-item"><span>Cybersecurity Fundamentals — IBM</span><a class="view-btn" href="https://drive.google.com/file/d/1OyZW6uBwyyrCYqi0Q5RrsO9DT04JcN4g/view?usp=sharing" target="_blank">View</a></div>
+          <div class="cert-item"><span>Mobile Application Development — Google/College</span><a class="view-btn" href="https://drive.google.com/file/d/17h15jPHwlY3ddXDYhvOGI2VUH9Vyi8cE/view?usp=sharing" target="_blank">View</a></div>
+          <div class="cert-item"><span>Generative AI Virtual Internship — EduSkills</span><a class="view-btn" href="https://drive.google.com/file/d/1kq0NLPU9XDWqL7fiXU7kUvSztL4WsVlu/view?usp=sharing" target="_blank">View</a></div>
+          <div class="cert-item"><span>iAspire Gold Level — Accenture Go for Gold</span><a class="view-btn" href="https://drive.google.com/file/d/1b9a1IrfAgWogJy5c6sepTNAVMStCkPRr/view?usp=sharing" target="_blank">View</a></div>
+          
+          <div class="cert-item"><span>Sql Intermediate Certificate - Hackerrank </span><a class="view-btn" href="https://drive.google.com/file/d/1-M3zMkCsWSAhzQXnACoSSBkIWTSkOaeQ/view?usp=sharing" target="_blank">View</a></div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="reveal">
+        <div class="section-header"><h2>Contact</h2><div class="line"></div></div>
+        <div class="card">
+          <div class="contact-grid">
+            <div class="contact-card contact-info">
+              <p><strong>Email:</strong> devikakanigiri28@gmail.com</p>
+              <p class="muted">Open to internships and full-time roles — available for remote or relocation.</p>
+            </div>
+            <div class="contact-card">
+              <a class="contact-icons" href="https://www.linkedin.com/in/devika-kanigiri-210343346" target="_blank">LinkedIn</a>
+              <a class="contact-icons" href="https://github.com/Devika9511" target="_blank">GitHub</a>
+              <a class="contact-icons" href="https://leetcode.com/u/Devikakanigiri/" target="_blank">LeetCode</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>© <span id="year"></span> Kanigiri Devika — Built with ♥︎</footer>
+    </main>
+  </div>
+
+  <script>
+    // smooth scroll for internal anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const t=document.querySelector(a.getAttribute('href'));
+        if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+      });
+    });
+
+    // reveal on scroll
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show') });
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    // year
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
